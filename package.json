@@ -1,12 +1,29 @@
 {
   "name": "challenge-chapter-03",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "arfiano jordhy ramadhan",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukinon/Challenge-Chapter-03.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ukinon/Challenge-Chapter-03/issues"
+  },
+  "homepage": "https://github.com/ukinon/Challenge-Chapter-03#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.2",
+    "randomstring": "^1.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
