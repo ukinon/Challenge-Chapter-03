@@ -97,11 +97,15 @@ const deleteCar = (req, res) => {
 };
 
 //routing
+const carRouter = express.Router();
+
 app.get("/", (req, res) => {
   res.send("ping successfully");
 });
-app.route("/cars/").get(getAllCars).post(addCar);
-app.route("/cars/:id").get(getCarById).put(editCar).delete(deleteCar);
+carRouter.route("/").get(getAllCars).post(addCar);
+carRouter.route("/:id").get(getCarById).put(editCar).delete(deleteCar);
+
+app.use("/cars", carRouter);
 
 //listen
 app.listen(port, () => {
