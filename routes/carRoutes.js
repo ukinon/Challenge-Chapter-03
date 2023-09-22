@@ -5,7 +5,10 @@ const carRouter = express.Router();
 
 carRouter.param("id", carsController.checkData);
 
-carRouter.route("/").get(carsController.getAllCars).post(carsController.addCar);
+carRouter
+  .route("/")
+  .get(carsController.getAllCars)
+  .post(carsController.checkBody, carsController.addCar);
 carRouter
   .route("/:id")
   .get(carsController.getCarById)

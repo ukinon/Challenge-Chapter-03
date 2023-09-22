@@ -17,6 +17,16 @@ const checkData = (req, res, next, val) => {
   next();
 };
 
+const checkBody = (req, res, next) => {
+  if (!req.body.model || !req.body.manufacture) {
+    res.status(404).json({
+      status: "failed",
+      message: `model and manufacture are required`,
+    });
+  }
+  next();
+};
+
 const getAllCars = (req, res) => {
   res.status(200).json({
     status: "success",
@@ -88,4 +98,5 @@ module.exports = {
   editCar,
   deleteCar,
   checkData,
+  checkBody,
 };
