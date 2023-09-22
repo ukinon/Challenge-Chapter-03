@@ -3,12 +3,14 @@ const carRouter = require("./routes/carRoutes");
 const morgan = require("morgan");
 
 const app = express();
-//middleware
+
+//middlewares
 app.use(express.json());
 app.use(morgan("dev"));
 app.use("/cars", carRouter);
 
-app.route("/").get((req, res) => {
+//ping test route
+app.get("/", (req, res) => {
   res.send("ping successfully");
 });
 
