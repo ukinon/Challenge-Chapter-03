@@ -1,9 +1,9 @@
 const fs = require("fs");
 const uuid = require("uuid");
 
-const path = `${__dirname}/../data/data.json`;
+const dataPath = `${__dirname}/../data/data.json`;
 
-const cars = JSON.parse(fs.readFileSync(path));
+const cars = JSON.parse(fs.readFileSync(dataPath));
 
 const checkData = (req, res, next, val) => {
   const car = cars.find((el) => el.id === val);
@@ -11,6 +11,7 @@ const checkData = (req, res, next, val) => {
   if (!car) {
     res.status(404).json({
       status: "failed",
+      requestTime: req.requestTime,
       message: `car with id ${val} not found`,
     });
   }
@@ -30,6 +31,7 @@ const checkBody = (req, res, next) => {
 const getAllCars = (req, res) => {
   res.status(200).json({
     status: "success",
+    requestTime: req.requestTime,
     data: cars,
   });
 };
@@ -40,6 +42,7 @@ const getCarById = (req, res) => {
 
   res.status(200).json({
     status: "success",
+    requestTime: req.requestTime,
     data: car,
   });
 };
@@ -49,9 +52,10 @@ const addCar = (req, res) => {
   const data = Object.assign({ id: id }, req.body);
 
   cars.push(data);
-  fs.writeFile(path, JSON.stringify(cars), (err) => {
+  fs.writeFile(dataPath, JSON.stringify(cars), (err) => {
     res.status(201).json({
       status: "success",
+      requestTime: req.requestTime,
       data: {
         car: data,
       },
@@ -65,9 +69,10 @@ const editCar = (req, res) => {
 
   cars[carIndex] = { ...cars[carIndex], ...req.body };
 
-  fs.writeFile(path, JSON.stringify(cars), (err) => {
+  fs.writeFile(dataPath, JSON.stringify(cars), (err) => {
     res.status(200).json({
       status: "success",
+      requestTime: req.requestTime,
       message: `car with id ${id} has been edited successfully`,
       data: {
         car: cars[carIndex],
@@ -82,9 +87,10 @@ const deleteCar = (req, res) => {
 
   cars.splice(carIndex, 1);
 
-  fs.writeFile(path, JSON.stringify(cars), (err) => {
+  fs.writeFile(dataPath, JSON.stringify(cars), (err) => {
     res.status(200).json({
       status: "success",
+      requestTime: req.requestTime,
       message: `car with id ${id} has been deleted successfully`,
       data: null,
     });
